@@ -65,6 +65,27 @@ jQuery( function() {
 			jQuery( 'form#EmbedForm input#location' ).val( nodeID );
 		}
 	} );
+
+	var loadSearchResults = function( url ) {
+		var wrapper = jQuery( 'div#search-results' );
+		var loader  = jQuery( 'div#search_progress' );
+		loader.show();
+		wrapper.empty();
+		jQuery.ajax( url ).done( function( html ) {
+			wrapper.append( html );
+			loader.hide();
+		} );
+	};
+	jQuery( 'div#search_box form' ).bind( 'submit', function( e ) {
+		e.preventDefault();
+		var form = jQuery( this );
+		var url  = form.attr( 'action' ) + '?q=' + encodeURIComponent( jQuery( '#SearchText', form ).val() );
+		loadSearchResults( url );
+	} );
+	jQuery( 'div#search_box' ).delegate( 'a', 'click', function( e ) {
+		e.preventDefault();
+		loadSearchResults( jQuery( this ).attr( 'href' ) );
+	} );
 } );
 
 -->
@@ -72,7 +93,6 @@ jQuery( function() {
 {/literal}
 
 <div class="upload-view">
-    <form action={concat('ezoe/upload/', $object_id, '/', $object_version, '/auto/1' )|ezurl} method="post" target="embed_upload" name="EmbedForm" id="EmbedForm" enctype="multipart/form-data" onsubmit="document.getElementById('upload_in_progress').style.display = '';">
 
         <div id="tabs" class="tabs">
         <ul>
@@ -84,6 +104,7 @@ jQuery( function() {
         </div>
 
 <div class="panel_wrapper" style="min-height: 360px;">
+    <form action={concat('ezoe/upload/', $object_id, '/', $object_version, '/auto/1' )|ezurl} method="post" target="embed_upload" name="EmbedForm" id="EmbedForm" enctype="multipart/form-data" onsubmit="document.getElementById('upload_in_progress').style.display = '';">
         <div class="panel">
             <table class="properties">
 
@@ -106,9 +127,9 @@ jQuery( function() {
                     <td colspan="2"><input id="objectCaption" name="ContentObjectAttribute_caption" size="53" type="text" value="" title="{'Caption for a image is usually shown bellow it as a description to the image.'|i18n('design/standard/ezoe/wai')}" /></td>
                 </tr>
 				<tr id="embedlistsrcrow">
-				    <td class="column1" valign="top"><label for="location">{'Location'|i18n('design/standard/ezoe')} (<a href="#" class="parent-node" target="_blank">auto</a>)</label></td>
+				    <td class="column1" valign="top"><label for="location">{'Location'|i18n('design/standard/ezoe')} (<a href="#" class="parent-node" target="_blank">not selected</a>)</label></td>
 				    <td colspan="2" id="embedlistsrccontainer">
-				        <input type="hidden" name="location" id="location" value="auto" />
+				        <input type="hidden" name="location" id="location" value="" />
 						<div id="contentstructure">
 							{include
 								uri='design:contentstructuremenu/content_structure_menu_dynamic_nxc_images.tpl'
@@ -146,13 +167,13 @@ jQuery( function() {
             </div>
             {/if}
         </div>
-
-{include uri="design:ezoe/box_search.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
+	</form>
+{include uri='design:ezoe/images_search/box.tpl'}
 
 {include uri="design:ezoe/box_browse.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
 
 {include uri="design:ezoe/box_bookmarks.tpl" box_embed_mode=false()}
 
 </div>
-     </form>
+     
 </div>

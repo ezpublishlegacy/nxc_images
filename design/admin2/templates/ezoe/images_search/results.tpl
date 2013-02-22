@@ -1,11 +1,14 @@
-<div class="results">
+<div class="ai-search-results">
 
 	{if gt( $search['SearchResult']|count, 0 )}
+	<h3>{'Results:'|i18n( 'design/admin/search' )}</h3>
 		{foreach $search['SearchResult'] as $node}
-		<a href="#">
-			{attribute_view_gui attribute=$node.data_map.image image_class='image_search_preview'}
-			{$node.name|wash}
-		</a><br />
+		<a href="javascript:eZOEPopupUtils.selectByEmbedId( {$node.contentobject_id}, {$node.node_id}, '{$node.name|wash}' );" class="ai-search-element">
+			<div class="ai-search-element-img">
+				{attribute_view_gui attribute=$node.data_map.image image_class='image_search_preview'}
+			</div>
+			<span>{$node.name|wash}</span>
+		</a>
 		{/foreach}
 
 		{include
@@ -24,8 +27,9 @@
 
 {if gt( $search['SearchResult']|count, 0 )}
 	{def $folder_node = false()}
-	<div class="facets">
-		<ul>
+	<div class="ai-search-facets">
+		<h3>{'Firters:'|i18n( 'design/admin/search' )}</h3>
+		<ul class="ai-search-facets-list" id="ai-search-facets-list">
 			{foreach $facet['SearchExtras'].facet_fields[0]['countList'] as $node_id => $count}
 				{set $folder_node = fetch( 'content', 'node', hash( 'node_id', $node_id ) )}
 				<li><a href="{concat( 'nxc_images/search/', $node_id, '/', $facet_node_id, '?q=', $search_word )|ezurl( 'no' )}">{$folder_node.name|wash} ({$count})</a></li>

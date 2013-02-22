@@ -82,7 +82,7 @@ jQuery( function() {
 		var url  = form.attr( 'action' ) + '?q=' + encodeURIComponent( jQuery( '#SearchText', form ).val() );
 		loadSearchResults( url );
 	} );
-	jQuery( 'div#search_box' ).delegate( 'a', 'click', function( e ) {
+	jQuery( 'div#search_box' ).delegate( 'div.ai-search-facets a, div.pagenavigator a', 'click', function( e ) {
 		e.preventDefault();
 		loadSearchResults( jQuery( this ).attr( 'href' ) );
 	} );

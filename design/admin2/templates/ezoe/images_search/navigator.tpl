@@ -13,13 +13,6 @@
 		{else}
 			<span class="previous"><span class="text disabled">&laquo;&nbsp;{'Previous'|i18n( 'design/admin/navigator' )}</span></span>
 		{/if}
-
-	    {if lt( $current_page, $pages_count )}
-			<span class="next"><a href="{concat( 'nxc_images/search/', $parent_node_id, '/', $facet_node_id, '/', $current_page|mul( $limit ), '/', $limit, '?q=', $search_word )|ezurl( 'no' )}"><span class="text">{'Next'|i18n( 'design/admin/navigator' )}&nbsp;&raquo;</span></a></span>
-		{else}
-			<span class="next"><span class="text disabled">{'Next'|i18n( 'design/admin/navigator' )}&nbsp;&raquo;</span></span>
-		{/if}
-
 		<span class="pages">
 		{set $pages_count         = $pages_count|dec()}
 		{set $viewable_pages_diff = $viewable_pages_diff|sub( 1 )}
@@ -63,7 +56,11 @@
 			{/if}
 		{/for}
 		</span>
-
+	    {if lt( $current_page, $pages_count )}
+			<span class="next"><a href="{concat( 'nxc_images/search/', $parent_node_id, '/', $facet_node_id, '/', $current_page|mul( $limit ), '/', $limit, '?q=', $search_word )|ezurl( 'no' )}"><span class="text">{'Next'|i18n( 'design/admin/navigator' )}&nbsp;&raquo;</span></a></span>
+		{else}
+			<span class="next"><span class="text disabled">{'Next'|i18n( 'design/admin/navigator' )}&nbsp;&raquo;</span></span>
+		{/if}
 	</p>
 	<div class="break"></div>
 </div>

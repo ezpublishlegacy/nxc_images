@@ -72,6 +72,10 @@ jQuery( function() {
 		loader.show();
 		wrapper.empty();
 		jQuery.ajax( url ).done( function( html ) {
+			var popup = $( 'div.mceWrapper', window.parent.document ).parent();
+			popup.css( 'width', 845 );
+			jQuery( 'iframe', popup ).css( 'width', 835 );
+
 			wrapper.append( html );
 			loader.hide();
 		} );
@@ -175,5 +179,5 @@ jQuery( function() {
 {include uri="design:ezoe/box_bookmarks.tpl" box_embed_mode=false()}
 
 </div>
-     
+
 </div>

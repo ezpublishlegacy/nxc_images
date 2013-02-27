@@ -8,7 +8,7 @@
 $http   = eZHTTPTool::instance();
 $q      = $http->hasVariable( 'q' ) ? $http->variable( 'q' ) : false;
 $offset = $Params['Offset'] !== null ? $Params['Offset'] : 0;
-$limit  = $Params['Limit'] !== null ? $Params['Limit'] : 10;
+$limit  = $Params['Limit'] !== null ? $Params['Limit'] : 12;
 
 $parentNodeID = (int) $Params['ParentNodeID'] > 0 ? $Params['ParentNodeID'] : 1;
 $facetNodeID  = (int) $Params['FacetNodeID'] > 0 ? $Params['FacetNodeID'] : 1;

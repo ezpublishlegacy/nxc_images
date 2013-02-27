@@ -86,13 +86,30 @@
 	}
 	</style>
 	{/literal}
+	{ezscript_require( array('ezjsc::jquery', 'ezjsc::yui2', 'ezajax_autocomplete.js') )}
+	<script type="text/javascript">
+		jQuery( function() {ldelim}
+			jQuery( '#mainarea-autocomplete-rs' ).css( 'width', jQuery( 'input#SearchText' ).width() );
+			var autocomplete = new eZAJAXAutoComplete( {ldelim}
+				url:            '{'ezjscore/call/ezajaxuploadersearch::autocomplete'|ezurl( 'no' )}',
+				inputid:        'SearchText',
+				containerid:    'mainarea-autocomplete-rs',
+				minquerylength: {ezini( 'AutoCompleteSettings', 'MinQueryLength', 'ezfind.ini' )},
+				resultlimit:    {ezini( 'AutoCompleteSettings', 'Limit', 'ezfind.ini' )}
+			{rdelim} );
+		{rdelim} );
+	</script>
+
 	{if $box_has_access}
 		<div id="search_progress" class="progress-indicator" style="display: none;"></div>
 		{def $mediaNodeID = ezini( 'NodeSettings', 'MediaRootNode', 'content.ini' )}
 		<div class="ai-search-form">
 			<form action="{concat( 'nxc_images/search/', $mediaNodeID, '/', $mediaNodeID )|ezurl( 'no' )}" method="get">
-				<input id="SearchText" name="SearchText" type="text" value="" title="{'Enter the word you want to search for here, for instance the name of the content you are looking for.'|i18n('design/standard/ezoe/wai')}" />
-				<input type="submit" name="SearchButton" id="SearchButton" value="{'Search'|i18n('design/admin/content/search')}" />
+				<div id="ezautocomplete">
+					<input id="SearchText" name="SearchText" type="text" value="" title="{'Enter the word you want to search for here, for instance the name of the content you are looking for.'|i18n('design/standard/ezoe/wai')}" />
+					<input type="submit" name="SearchButton" id="SearchButton" value="{'Search'|i18n('design/admin/content/search')}" />
+					<div id="mainarea-autocomplete-rs"></div>
+				</div>
 			</form>
 		</div>
 

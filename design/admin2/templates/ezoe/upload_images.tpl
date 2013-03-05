@@ -14,6 +14,9 @@
 ul, ol {
 	padding: 0;
 }
+a img {
+	border: none;
+}
 {/literal}
 </style>
 

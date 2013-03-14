@@ -123,7 +123,7 @@ eZAjaxUploaderNXCImages.prototype.endAjax = function () {
     contentNode.setStyle('opacity', 1);
     this.Y.one(this.conf.loading.loader).hide();
     contentNode.all( 'script' ).each( function( s ) {
-    	eval( s.get( 'innerHTML' ) );
+    	jQuery.globalEval( s.get( 'innerHTML' ) );
     	s.remove( true );
    	} );
 };

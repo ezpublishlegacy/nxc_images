@@ -43,7 +43,6 @@
 {/if}
 
 <script type="text/javascript">
-<!--
 (function(){ldelim}
 
 {cache-block keys=array( $root_node_id, $access_type ) expiry=0}
@@ -130,5 +129,4 @@
 	jQuery( '#contentstructure' ).append( jQuery( '<ul id="content_tree_menu">' + treeMenu.generateEntry( rootNode, false, true ) + '<\/ul>' ) );
     window.treeMenu.load( false, rootNode.node_id, rootNode.modified_subnode );
 {rdelim})();
-// -->
 </script>

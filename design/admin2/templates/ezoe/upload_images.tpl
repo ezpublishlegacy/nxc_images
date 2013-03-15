@@ -59,11 +59,27 @@ eZOEPopupUtils.settings.browseClassGenerator = function( n, hasImage ){
 };
 
 jQuery( function() {
+	var allowedNodePathes = [];
+{/literal}
+	{def $allowedParentNode = false()}
+	{foreach ezini( 'General', 'AllowedParentNodeIDs', 'imageuploader.ini' ) as $allowedParentNodeID}
+		{set $allowedParentNode = fetch( 'content', 'node', hash( 'node_id', $allowedParentNodeID ) )}
+		allowedNodePathes.push( '{$allowedParentNode.url_alias|ezurl( 'no' )}' );
+	{/foreach}
+	{undef $allowedParentNode}
+{literal}
 	jQuery( 'li a.image-text' ).live( 'click', 'div#contentstructure', function( e ) {
 		e.preventDefault();
-		var el     = jQuery( this );
-		var depth  = el.parents( 'ul' ).length;
-		if( depth > 1 ) {
+		var el    = jQuery( this );
+		var depth = el.parents( 'ul' ).length;
+		var isAllowed = false;
+		jQuery.each( allowedNodePathes, function( i, path ) {
+			if( el.attr( 'href' ).indexOf( path ) !== -1 ) {
+				isAllowed = true;
+				return false;
+			}
+		} );
+		if( isAllowed ) {
 			var nodeID = el.parent( 'li' ).attr( 'id' ).replace( 'n', '' );
 			jQuery( 'form#EmbedForm a.parent-node' ).show().attr( 'href', el.attr( 'href' ) ).html( el.html() );
 			jQuery( 'form#EmbedForm input#location' ).val( nodeID );

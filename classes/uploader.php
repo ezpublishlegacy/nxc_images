@@ -154,23 +154,27 @@ class ezjscServerFunctionsAjaxUploaderNXCImages extends ezjscServerFunctions
 		// Check parent node
 		if( count( $errors ) === 0 ) {
 			$parentNode = eZContentObjectTreeNode::fetch( $fields['parentNodeID'] );
-			if(
-				$parentNode instanceof eZContentObjectTreeNode === false
-				|| (int) $parentNode->attribute( 'depth' ) <= 1
-			) {
+			if( $parentNode instanceof eZContentObjectTreeNode === false ) {
 				$errors[] = 'Not valid node is selected';
 			} else {
-				// Check permissions
-				$canCreateClassist = $parentNode->canCreateClassList();
-				$canUpload         = false;
-				foreach( $canCreateClassist as $c ) {
-					if ( $c['id'] == $class->attribute( 'id' ) ) {
-					    $canUpload = true;
-					    break;
+				// Check allowed parent nodes
+				$allowedParentNodeIDs = (array) eZINI::instance( 'imageuploader.ini.apped.php' )->variable( 'General', 'AllowedParentNodeIDs' );
+				$pathNodeIDs          = explode( '/', $parentNode->attribute( 'path_string' ) );
+				if( count( array_intersect( $allowedParentNodeIDs, $pathNodeIDs ) ) === 0 ) {
+					$errors[] = 'You are not able to uploade to selected node. Allowed node IDs are: ' . implode( ', ', $allowedParentNodeIDs );
+				} else {
+					// Check permissions
+					$canCreateClassist = $parentNode->canCreateClassList();
+					$canUpload         = false;
+					foreach( $canCreateClassist as $c ) {
+						if ( $c['id'] == $class->attribute( 'id' ) ) {
+						    $canUpload = true;
+						    break;
+						}
 					}
-				}
-				if( $canUpload === false ) {
-					$errors[] = 'You are not permitted to upload the file in the selected node';
+					if( $canUpload === false ) {
+						$errors[] = 'You are not permitted to upload the file in the selected node';
+					}
 				}
 			}
 		}

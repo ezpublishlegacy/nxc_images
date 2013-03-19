@@ -106,7 +106,8 @@ div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-open, div
     background: transparent url( '../images/content_tree-icons.png' ) no-repeat center 0px scroll;
 }
 
-div#contentstructure ul#content_tree_menu_browse ul a.openclose-close
+div#contentstructure ul#content_tree_menu_browse ul a.openclose-close,
+div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-close
 {
     background-position: center -16px;
 }

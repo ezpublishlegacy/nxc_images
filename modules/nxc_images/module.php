@@ -15,6 +15,11 @@ $ViewList = array(
 		'script'    => 'search.php',
 		'functions' => array( 'search' ),
 		'params' 	=> array( 'ParentNodeID', 'FacetNodeID', 'Offset', 'Limit' )
+	),
+	'content_treemenu' => array(
+		'script'    => 'content_treemenu.php',
+		'functions' => array( 'search' ),
+		'params' 	=> array( 'NodeID', 'Modified', 'Expiry', 'Perm' )
 	)
 );
 

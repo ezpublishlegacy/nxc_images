@@ -3,7 +3,7 @@
 	{if gt( $search['SearchResult']|count, 0 )}
 	<h3>{'Results:'|i18n( 'design/admin/search' )}</h3>
 		{foreach $search['SearchResult'] as $node}
-		<a href="javascript:eZOEPopupUtils.selectByEmbedId( {$node.contentobject_id}, {$node.node_id}, '{$node.name|wash}' );" class="ai-search-element">
+		<a href="javascript:console.log( eZOEPopupUtils );eZOEPopupUtils.selectByEmbedId( {$node.contentobject_id}, {$node.node_id}, '{$node.name|wash}' );" class="ai-search-element">
 			<div class="ai-search-element-img">
 				{attribute_view_gui attribute=$node.data_map.image image_class='image_search_preview'}
 			</div>

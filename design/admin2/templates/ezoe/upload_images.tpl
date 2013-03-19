@@ -7,8 +7,11 @@
                                            )}
 <script type="text/javascript" src={"javascript/lib/ezjslibimagepreloader.js"|ezdesign}></script>
 <script type="text/javascript" src={"javascript/contentstructuremenu_dynamic.js"|ezdesign}></script>
+<script type="text/javascript" src={"javascript/contentstructuremenu_dynamic_nxcimages_browse.js"|ezdesign}></script>
 <link rel="stylesheet" type="text/css" href={"stylesheets/pagelayout.css"|ezdesign} />
 <link rel="stylesheet" type="text/css" href={"stylesheets/ezajax_autocomplete.css"|ezdesign} />
+<link rel="stylesheet" type="text/css" href={"stylesheets/browse_tree.css"|ezdesign} />
+
 <style>
 {literal}
 ul, ol {
@@ -69,8 +72,12 @@ jQuery( function() {
 	{undef $allowedParentNode}
 {literal}
 	jQuery( 'li a.image-text' ).live( 'click', 'div#contentstructure', function( e ) {
+		var el = jQuery( this );
+		if( el.attr( 'href' ).indexOf( 'javascript' ) !== -1 ) {
+			return true;
+		}
+
 		e.preventDefault();
-		var el    = jQuery( this );
 		var depth = el.parents( 'ul' ).length;
 		var isAllowed = false;
 		jQuery.each( allowedNodePathes, function( i, path ) {
@@ -194,7 +201,7 @@ jQuery( function() {
 	</form>
 {include uri='design:ezoe/images_search/box.tpl'}
 
-{include uri="design:ezoe/box_browse.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
+{include uri="design:ezoe/images_search/box_browse.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
 
 {include uri="design:ezoe/box_bookmarks.tpl" box_embed_mode=false()}
 

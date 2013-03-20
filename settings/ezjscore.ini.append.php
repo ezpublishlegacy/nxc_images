@@ -5,4 +5,7 @@ Class=ezjscServerFunctionsAjaxUploaderNXCImages
 
 [ezjscServer_ezajaxuploadersearch]
 Class=nxcImagesServerCallFunctions
+
+[ezjscServer_nxcimages]
+Class=nxcImagesServerCallFunctions
 */ ?>

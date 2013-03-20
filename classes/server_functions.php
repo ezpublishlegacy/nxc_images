@@ -58,4 +58,26 @@ class nxcImagesServerCallFunctions
 
 		return $result['facet_counts']['facet_fields'][ $facetField ];
 	}
+
+	public static function search( $args ) {
+		$results = ezjscServerFunctionsJs::search( $args );
+		foreach( $results['SearchResult'] as $key => $item ) {
+			$object   = eZContentObject::fetch( $item['contentobject_id'] );
+			$dataMap  = $object->attribute( 'data_map' );
+			$imageURL = null;
+
+			if(
+				isset( $dataMap['image'] )
+				&& $dataMap['image']->attribute( 'has_content' )
+				&& $dataMap['image']->attribute( 'data_type_string' ) === 'ezimage'
+			) {
+				$image    = $dataMap['image']->attribute( 'content' );
+				$alias    = $image->attribute( 'image_search_preview' );
+				$imageURL = $alias['url'];
+			}
+
+			$results['SearchResult'][ $key ]['image_url'] = $imageURL;
+		}
+		return $results;
+	}
 }

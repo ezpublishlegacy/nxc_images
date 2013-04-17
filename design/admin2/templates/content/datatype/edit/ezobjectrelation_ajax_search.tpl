@@ -12,6 +12,8 @@
 		margin-bottom: 10px;
 		margin-right: 10px;
 		overflow: hidden;
+		*zoom: 1;
+		*display: inline;
 	}
 	.m-search-results a img {
 		position: absolute;

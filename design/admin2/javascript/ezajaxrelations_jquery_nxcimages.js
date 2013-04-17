@@ -38,6 +38,7 @@ jQuery(function( $ )
                 var html = '', arr = data.content.SearchResult, pub = $('#ezobjectrelation-search-published-text'), image = '';
                 for ( var i = 0, l = arr.length; i < l; i++ )
                 {
+                	image = '';
                 	if( arr[i].image_url ) {
                 		image = '<img src="/' + arr[i].image_url + '" />';
                 	}

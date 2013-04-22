@@ -60,6 +60,11 @@ class nxcImagesServerCallFunctions
 	}
 
 	public static function search( $args ) {
+		// Hack to search only by images class
+		$_POST['SearchContentClassID'] = eZContentClass::classIDByIdentifier( 'image' );
+		// Hack to increase the limit
+		$args[2] = 50;
+
 		$results = ezjscServerFunctionsJs::search( $args );
 		foreach( $results['SearchResult'] as $key => $item ) {
 			$object   = eZContentObject::fetch( $item['contentobject_id'] );

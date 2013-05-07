@@ -161,7 +161,18 @@ class ezjscServerFunctionsAjaxUploaderNXCImages extends ezjscServerFunctions
 				$allowedParentNodeIDs = (array) eZINI::instance( 'imageuploader.ini' )->variable( 'General', 'AllowedParentNodeIDs' );
 				$pathNodeIDs          = explode( '/', $parentNode->attribute( 'path_string' ) );
 				if( count( array_intersect( $allowedParentNodeIDs, $pathNodeIDs ) ) === 0 ) {
-					$errors[] = 'You are not able to uploade to selected node. Allowed node IDs are: ' . implode( ', ', $allowedParentNodeIDs );
+					$allowedNodes   = array();
+					$allowedNodeIDs = implode( ', ', $allowedParentNodeIDs );
+					foreach( $allowedParentNodeIDs as $allowedNodeID ) {
+						$allowedNode = eZContentObjectTreeNode::fetch( (int) trim( $allowedNodeID ) );
+						if( $allowedNode instanceof eZContentObjectTreeNode ) {
+							$url = $allowedNode->attribute( 'url_alias' );
+							eZURI::transformURI( $url, false );
+							$allowedNodes[] = $allowedNode->attribute( 'name' );
+						}
+					}
+
+					$errors[] = 'You are not able to uploade to selected node. Allowed nodes are: ' . implode( ', ', $allowedNodes );
 				} else {
 					// Check permissions
 					$canCreateClassist = $parentNode->canCreateClassList();

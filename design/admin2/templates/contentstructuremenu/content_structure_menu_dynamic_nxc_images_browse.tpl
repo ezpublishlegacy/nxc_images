@@ -1,3 +1,5 @@
+{default $tree_url = 'nxc_images/content_treemenu'}
+
 {if is_set( $custom_root_node )}
     {def $root_node    = $custom_root_node
          $root_node_id = $root_node.node_id}
@@ -69,7 +71,7 @@
             $classIconsSize = ezini('TreeMenu','ClassIconsSize','contentstructuremenu.ini')}
         var params = {ldelim}{*
             *}"iconsList":[],{*
-            *}"contentTreeUrl":"{"nxc_images/content_treemenu"|ezurl(no)}/",{*
+            *}"contentTreeUrl":"{$tree_url|ezurl(no)}/",{*
             *}"wwwDirPrefix":"{ezsys('wwwdir')}/{$iconInfo.theme_path}/{$iconInfo.size_path_list[$classIconsSize]}/"{rdelim};
 
         params.languages = {ldelim}{*

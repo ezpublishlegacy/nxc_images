@@ -159,7 +159,7 @@ function ContentStructureMenuBrowse( params, i18n )
                 + '" alt="" width="16" height="16" />';
         }
         var href = ( ( params.action )? params.action + '/' + item.node_id : item.url );
-        if( item.class_id == 30 ) {
+        if( item.class_id == 30 || item.class_id == 28 ) {
         	href = 'javascript:eZOEPopupUtils.selectByEmbedId( ' + item.object_id + ', ' + item.node_id + ', \'' + item.name + '\' );'
         }
         html += '&nbsp;<a class="image-text" href="'

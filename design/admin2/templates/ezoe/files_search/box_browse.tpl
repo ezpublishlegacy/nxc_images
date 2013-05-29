@@ -13,6 +13,7 @@
 				custom_root_node_id=ezini( 'NodeSettings', 'MediaRootNode', 'content.ini' )
 				tree_wrapper_id='contentstructure-browse'
 				index='browse'
+				tree_url='nxc_files/content_treemenu'
 			}
 		</div>
 

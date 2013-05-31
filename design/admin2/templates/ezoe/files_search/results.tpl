@@ -1,5 +1,5 @@
+{def $mime_icons = ezini( 'MimeIcons', 'MimeMap', 'icon.ini' )}
 <div class="ai-search-results">
-
 	{if gt( $search['SearchResult']|count, 0 )}
 	<h3>{'Results:'|i18n( 'design/admin/search' )}</h3>
 		{foreach $search['SearchResult'] as $node}
@@ -7,9 +7,8 @@
 			<a href="javascript:console.log( eZOEPopupUtils );eZOEPopupUtils.selectByEmbedId( {$node.contentobject_id}, {$node.node_id}, '{$node.name|wash}' );">
 				<span>{$node.name|wash}</span>
 			</a>
-			file
 			<div class="ai-sear ch-element-file-info">
-				{$node.data_map.file.content.mime_type} {$node.data_map.file.content.filesize|si( byte )}
+				{if is_set( $mime_icons[ $node.data_map.file.content.mime_type ] )}<img src={concat( 'share/icons/crystal-admin/32x32/', $mime_icons[ $node.data_map.file.content.mime_type ] )|ezroot()} alt="{$node.data_map.file.content.mime_type}" style="margin-top:10px;"/>{else}{$node.data_map.file.content.mime_type}{/if} {$node.data_map.file.content.filesize|si( byte )}
 			</div>
 			<div class="ai-sear ch-element-description">
 				{attribute_view_gui attribute=$node.data_map.description}

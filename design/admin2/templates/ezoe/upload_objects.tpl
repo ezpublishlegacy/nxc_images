@@ -84,6 +84,32 @@ jQuery( function() {
 			jQuery( 'form#EmbedForm input#location' ).val( nodeID );
 		}
 	} );
+
+	var loadSearchResults = function( url ) {
+		var wrapper = jQuery( 'div#search-results' );
+		var loader  = jQuery( 'div#search_progress' );
+		loader.show();
+		wrapper.empty();
+		jQuery.ajax( url ).done( function( html ) {
+			var popup = $( 'div.mceWrapper', window.parent.document ).parent();
+			popup.css( 'width', 845 );
+			jQuery( 'iframe', popup ).css( 'width', 835 );
+
+			wrapper.append( html );
+			loader.hide();
+		} );
+	};
+
+	jQuery( 'div#search_box form' ).bind( 'submit', function( e ) {
+		e.preventDefault();
+		var form = jQuery( this );
+		var url  = form.attr( 'action' ) + '?q=' + encodeURIComponent( jQuery( '#SearchText', form ).val() );
+		loadSearchResults( url );
+	} );
+	jQuery( 'div#search_box' ).delegate( 'div.ai-search-facets a, div.pagenavigator a', 'click', function( e ) {
+		e.preventDefault();
+		loadSearchResults( jQuery( this ).attr( 'href' ) );
+	} );
 } );
 -->
 </script>
@@ -174,13 +200,13 @@ jQuery( function() {
             </div>
             {/if}
         </div>
-
-{include uri="design:ezoe/box_search.tpl" embed_mode=false() class_filter_array=$class_filter_array}
+     </form>
+{include uri="design:ezoe/files_search/box.tpl" embed_mode=false() class_filter_array=$class_filter_array}
 
 {include uri="design:ezoe/files_search/box_browse.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
 
 {include uri="design:ezoe/box_bookmarks.tpl" embed_mode=false()}
 
 </div>
-     </form>
+
 </div>

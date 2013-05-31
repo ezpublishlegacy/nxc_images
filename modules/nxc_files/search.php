@@ -16,7 +16,7 @@ $searchResult = false;
 
 if( $q !== false ) {
 	$params       = array(
-		'SearchContentClassID' => array( eZContentClass::classIDByIdentifier( 'image' ) ),
+		'SearchContentClassID' => array( eZContentClass::classIDByIdentifier( 'file' ) ),
 		'SearchOffset'         => $offset,
 		'SearchLimit'          => $limit,
 		'SearchSubTreeArray'   => array( $parentNodeID ),
@@ -45,6 +45,6 @@ $tpl->setVariable( 'offset', $offset );
 $tpl->setVariable( 'limit', $limit );
 $tpl->setVariable( 'search', $searchResult );
 $tpl->setVariable( 'facet', $facetResult );
-echo $tpl->fetch( 'design:ezoe/images_search/results.tpl' );
+echo $tpl->fetch( 'design:ezoe/files_search/results.tpl' );
 
 eZExecution::cleanExit();

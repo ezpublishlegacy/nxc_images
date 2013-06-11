@@ -54,14 +54,28 @@ tinyMCEPopup.onInit.add( function(){
 });
 
 jQuery( function() {
-	var allowedNodePathes = [];
+	var allowedNodePathes       = [];
+	var excludeParentNodePathes = [];
+	var excludeNodePathes       = [];
 {/literal}
 	{def $allowedParentNode = false()}
-	{foreach ezini( 'General', 'AllowedParentNodeIDs', 'fileuploader.ini' ) as $allowedParentNodeID}
-		{set $allowedParentNode = fetch( 'content', 'node', hash( 'node_id', $allowedParentNodeID ) )}
+	{foreach ezini( 'General', 'AllowedParentNodeIDs', 'fileuploader.ini' ) as $nodeID}
+		{set $allowedParentNode = fetch( 'content', 'node', hash( 'node_id', $nodeID ) )}
 		allowedNodePathes.push( '{$allowedParentNode.url_alias|ezurl( 'no' )}' );
 	{/foreach}
 	{undef $allowedParentNode}
+	{def $excludeParentNode = false()}
+	{foreach ezini( 'General', 'ExlcudeParentNodeIDs', 'fileuploader.ini' ) as $nodeID}
+		{set $excludeParentNode = fetch( 'content', 'node', hash( 'node_id', $nodeID ) )}
+		excludeParentNodePathes.push( '{$excludeParentNode.url_alias|ezurl( 'no' )}' );
+	{/foreach}
+	{undef $excludeParentNode}
+	{def $excludeNode = false()}
+	{foreach ezini( 'General', 'ExlcudeNodeIDs', 'fileuploader.ini' ) as $nodeID}
+		{set $excludeNode = fetch( 'content', 'node', hash( 'node_id', $nodeID ) )}
+		excludeNodePathes.push( '{$excludeNode.url_alias|ezurl( 'no' )}' );
+	{/foreach}
+	{undef $excludeNode}
 {literal}
 	jQuery( 'li a.image-text' ).live( 'click', 'div#contentstructure', function( e ) {
 		var el = jQuery( this );
@@ -75,6 +89,18 @@ jQuery( function() {
 		jQuery.each( allowedNodePathes, function( i, path ) {
 			if( el.attr( 'href' ).indexOf( path ) !== -1 ) {
 				isAllowed = true;
+				return false;
+			}
+		} );
+		jQuery.each( excludeParentNodePathes, function( i, path ) {
+			if( el.attr( 'href' ).indexOf( path ) !== -1 ) {
+				isAllowed = false;
+				return false;
+			}
+		} );
+		jQuery.each( excludeNodePathes, function( i, path ) {
+			if( el.attr( 'href' ) == path ) {
+				isAllowed = false;
 				return false;
 			}
 		} );

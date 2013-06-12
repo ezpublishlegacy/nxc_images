@@ -158,9 +158,16 @@ class ezjscServerFunctionsAjaxUploaderNXCImages extends ezjscServerFunctions
 				$errors[] = 'Not valid node is selected';
 			} else {
 				// Check allowed parent nodes
-				$allowedParentNodeIDs = (array) eZINI::instance( 'imageuploader.ini' )->variable( 'General', 'AllowedParentNodeIDs' );
+				$imageIni = eZINI::instance( 'imageuploader.ini' );
+				$allowedParentNodeIDs = (array) $imageIni->variable( 'General', 'AllowedParentNodeIDs' );
 				$pathNodeIDs          = explode( '/', $parentNode->attribute( 'path_string' ) );
-				if( count( array_intersect( $allowedParentNodeIDs, $pathNodeIDs ) ) === 0 ) {
+				$excludeParentNodeIds = (array) $imageIni->variable( 'General', 'ExlcudeParentNodeIDs' );
+				$excludeNodeIDs       = (array) $imageIni->variable( 'General', 'ExlcudeNodeIDs' );
+				if(
+					count( array_intersect( $allowedParentNodeIDs, $pathNodeIDs ) ) === 0
+					|| count( array_intersect( $excludeParentNodeIds, $pathNodeIDs ) ) > 0
+					|| in_array( $fields['parentNodeID'], $excludeNodeIDs )
+				) {
 					$allowedNodes   = array();
 					$allowedNodeIDs = implode( ', ', $allowedParentNodeIDs );
 					foreach( $allowedParentNodeIDs as $allowedNodeID ) {

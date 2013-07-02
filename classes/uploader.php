@@ -157,8 +157,18 @@ class ezjscServerFunctionsAjaxUploaderNXCImages extends ezjscServerFunctions
 			if( $parentNode instanceof eZContentObjectTreeNode === false ) {
 				$errors[] = 'Not valid node is selected';
 			} else {
-				// Check allowed parent nodes
-				$imageIni = eZINI::instance( 'imageuploader.ini' );
+				$handlerData            = $http->postVariable( 'AjaxUploadHandlerData', array() );
+				$contentObjectAttribute = eZContentObjectAttribute::fetch(
+					$handlerData['ObjectRelationsAttributeId'],
+					$handlerData['Version']
+				);
+
+				if( $contentObjectAttribute->attribute( 'contentclass_attribute_identifier' ) == 'image' ) {
+					$imageIni = eZINI::instance( 'imageuploader.ini' );
+				} else {
+					$imageIni = eZINI::instance( 'fileuploader.ini' );
+				}
+				
 				$allowedParentNodeIDs = (array) $imageIni->variable( 'General', 'AllowedParentNodeIDs' );
 				$pathNodeIDs          = explode( '/', $parentNode->attribute( 'path_string' ) );
 				$excludeParentNodeIds = (array) $imageIni->variable( 'General', 'ExlcudeParentNodeIDs' );

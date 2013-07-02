@@ -1,0 +1,154 @@
+div#contentstructure-browse
+{
+	text-align: left;
+    overflow: hidden;
+    padding-top: 0.5em;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse
+{
+    margin-top: 0;
+    margin-left: 0.25em;
+    padding-left: 0.5em;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse ul
+{
+    margin: 0;
+    padding-top: 4px;
+    padding-bottom: 0;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse ul ul
+{
+    margin-left: 0;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse li
+{
+    list-style-type: none;
+    white-space: nowrap;
+    position: relative;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse ul li
+{
+    margin: 0;
+    padding-top: 0;
+    padding-left: 20px;
+    padding-bottom: 4px;
+    background-image: url(../images/bg_content_tree_li.png);
+    background-repeat: no-repeat;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse ul li.lastli
+{
+    background-position: left -9990px;
+    padding-bottom: 2px;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse li img
+{
+    vertical-align: middle;
+}
+
+div#contentstructure-browse a.nodeicon
+{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+div#contentstructure-browse li span.node-name-normal
+{
+    font-weight: normal;
+}
+
+div#contentstructure-browse li.currentnode > a.image-text span.node-name-normal, div#contentstructure-browse li.currentnode > a.image-text span.node-name-hidden, div#contentstructure-browse li.currentnode > a.image-text span.node-name-hiddenbyparent /* Highlighting of current node */
+{
+    color: #E24602;
+    padding: 0 0.25em 0 0.2em;
+}
+
+div#contentstructure-browse li a.image-text span.node-name-hidden, div#contentstructure-browse li.currentnode li a.image-text span.node-name-hidden
+{
+    font-weight: normal;
+    font-style: normal;
+    background-color: #ddd;
+    padding: 0 0.2em 0 0.2em;
+}
+
+div#contentstructure-browse li a.image-text span.node-name-hiddenbyparent, div#contentstructure-browse li.currentnode li a.image-text span.node-name-hiddenbyparent
+{
+    font-weight: normal;
+    font-style: normal;
+    background-color: #eee;
+    padding: 0 0.2em 0 0.2em;
+}
+
+div#contentstructure-browse span.node-hidden, div#contentstructure-browse span.node-hiddenbyparent
+{
+    display: none;
+}
+
+div#contentstructure-browse span.openclose
+{
+    visibility: hidden;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-open, div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-close, div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-busy, div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-error
+{
+    position: absolute;
+    left: 0;
+    _left: -20px; /* to fix a bug in IE 6 */
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: transparent url( '../images/content_tree-icons.png' ) no-repeat center 0px scroll;
+}
+
+div#contentstructure ul#content_tree_menu_browse ul a.openclose-close,
+div#contentstructure-browse ul#content_tree_menu_browse ul a.openclose-close
+{
+    background-position: center -16px;
+}
+
+div#contentstructure ul#content_tree_menu_browse ul a.openclose-error
+{
+    background-position: center -32px;
+}
+
+div#contentstructure ul#content_tree_menu_browse ul a.openclose-busy
+{
+    background-position: center -48px;
+    cursor: progress;
+}
+
+div#contentstructure ul#content_tree_menu_browse div.loaded
+{
+    display: block;
+}
+
+div#contentstructure ul#content_tree_menu_browse div.error
+{
+    white-space: normal;
+    color: grey;
+    margin: 10px 0;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse div.error > span
+{
+    display: inline-block;
+    height: 9px;
+    width: 9px;
+    border-radius: 9px;
+    margin-right: 6px;
+    background: Red;
+}
+
+div#contentstructure-browse ul#content_tree_menu_browse div.hidden
+{
+    display: none;
+}

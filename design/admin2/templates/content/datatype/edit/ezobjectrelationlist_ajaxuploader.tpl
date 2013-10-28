@@ -122,6 +122,15 @@
             });
         });
 
+	jQuery( function() {
+		jQuery( 'li a.image-text' ).live( 'click', 'form.ajaxuploader-upload div#contentstructure', function( e ) {
+			e.preventDefault();
+			var el     = jQuery( this );
+			var nodeID = el.parent( 'li' ).attr( 'id' ).replace( 'n', '' );
+			jQuery( 'form.ajaxuploader-upload a.parent-node' ).show().attr( 'href', el.attr( 'href' ) ).html( el.html() );
+			jQuery( 'form.ajaxuploader-upload input[name="parentNodeID"]' ).val( nodeID );
+		} );
+	} );
     })();
     {/literal}
     </script>

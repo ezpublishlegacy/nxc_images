@@ -150,7 +150,7 @@ jQuery( function() {
         <ul>
             <li class="tab" title="{'Upload file from your local machine.'|i18n('design/standard/ezoe/wai')}"><span><a href="JavaScript:void(0);">{'Upload'|i18n('design/admin/content/upload')}</a></span></li>
             <li class="tab" title="{'Search for content already in eZ Publish.'|i18n('design/standard/ezoe/wai')}"><span><a href="JavaScript:void(0);">{'Search'|i18n('design/admin/content/search')}</a></span></li>
-            <li class="tab" title="{'Browse the content tree in eZ Publish.'|i18n('design/standard/ezoe/wai')}"><span><a href="JavaScript:void(0);">{'Browse'|i18n('design/standard/ezoe')}</a></span></li>
+            <li class="tab" title="{'Browse the content tree in eZ Publish.'|i18n('design/standard/ezoe/wai')}"><span><a href="JavaScript:void(0);">{'Browse'|i18n('design/standard/content/browse')}</a></span></li>
             <li class="tab" title="{'Select or browse content among your personal eZ Publish bookmarks.'|i18n('design/standard/ezoe/wai')}"><span><a href="JavaScript:void(0);">{'Bookmarks'|i18n( 'design/admin/content/browse' )}</a></span></li>
         </ul>
         </div>
@@ -231,7 +231,7 @@ jQuery( function() {
 
 {include uri="design:ezoe/files_search/box_browse.tpl" box_embed_mode=false() box_class_filter_array=$class_filter_array}
 
-{include uri="design:ezoe/box_bookmarks.tpl" embed_mode=false()}
+{include uri="design:ezoe/files_search/box_bookmarks.tpl" embed_mode=false()}
 
 </div>
 

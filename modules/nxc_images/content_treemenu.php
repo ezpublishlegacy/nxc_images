@@ -106,7 +106,7 @@ if ( $contentstructuremenuINI->variable( 'TreeMenu', 'UseCache' ) == 'enabled' a
      $siteINI->variable( 'TemplateSettings', 'TemplateCache' ) == 'enabled' )
 {
     list( $handler, $cacheFileContent ) = eZTemplateCacheBlock::retrieve( array(
-        'content_structure',
+        'images_content_structure',
         $nodeID,
         $showHidden,
         $user->roleIDList(),

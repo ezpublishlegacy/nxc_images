@@ -1,4 +1,4 @@
-function ContentStructureMenuBrowse( params, i18n )
+function NXCContentStructureMenu( params, i18n )
 {
     this.cookieName     = "contentStructureMenu";
     this.cookieValidity = 3650; // days
@@ -56,7 +56,7 @@ function ContentStructureMenuBrowse( params, i18n )
         {
             html += '<a class="openclose-open" id="a'
                 + item.node_id
-                + '" href="#" onclick="this.blur(); return treeMenuBrowse.load( this, '
+                + '" href="#" onclick="this.blur(); return treeMenu.load( this, '
                 + item.node_id
                 + ', '
                 + item.modified_subnode
@@ -146,11 +146,7 @@ function ContentStructureMenuBrowse( params, i18n )
                 + ', '
                 + ( ( canCreateClasses )? '-1':
                                           '\'menu-create-here\'' )
-                + ' ); return false"><img src="'
-                + icon
-                + '" alt="" title="['
-                + params.classes[item.class_id].name.replace(/>/g,'&gt;').replace(/"/g, '&quot;')
-                + '] ' + i18n.expand + '" width="16" height="16" /><\/a>';
+                + ' ); return false"><\/a>';
         }
         else
         {
@@ -158,12 +154,8 @@ function ContentStructureMenuBrowse( params, i18n )
                 + icon
                 + '" alt="" width="16" height="16" />';
         }
-        var href = ( ( params.action )? params.action + '/' + item.node_id : item.url );
-        if( item.class_id == 30 || item.class_id == 28 ) {
-        	href = 'javascript:eZOEPopupUtils.selectByEmbedId( ' + item.object_id + ', ' + item.node_id + ', \'' + item.name + '\' );'
-        }
         html += '&nbsp;<a class="image-text" href="'
-            + href
+            + ( ( params.action )? params.action + '/' + item.node_id : item.url )
             + '"';
 
         if ( params.showTips )
@@ -177,7 +169,11 @@ function ContentStructureMenuBrowse( params, i18n )
                 + '"';
         }
 
-        html += '><span class="node-name-'
+        html += '><img src="'
+            + icon
+            + '" alt="" title="['
+            + params.classes[item.class_id].name.replace(/>/g,'&gt;').replace(/"/g, '&quot;')
+            + ']" width="16" height="16" />&nbsp;<span class="node-name-'
             + ( ( item.is_hidden )? 'hidden':
                                     ( item.is_invisible )? 'hiddenbyparent':
                                                            'normal' )
@@ -195,7 +191,7 @@ function ContentStructureMenuBrowse( params, i18n )
         }
 
         html += '<\/a>';
-        html += '<div id="c-browse'
+        html += '<div id="c'
              + item.node_id
              + '"><\/div>';
         html += '<\/li>';
@@ -205,7 +201,7 @@ function ContentStructureMenuBrowse( params, i18n )
 
     this.load = function( aElement, nodeID, modifiedSubnode )
     {
-        var divElement = document.getElementById('c-browse' + nodeID);
+        var divElement = document.getElementById('c' + nodeID);
 
         if ( !divElement )
         {
@@ -325,7 +321,7 @@ function ContentStructureMenuBrowse( params, i18n )
 
     this.openUnder = function( parentNodeID )
     {
-        var divElement = document.getElementById( 'c-browse' + parentNodeID );
+        var divElement = document.getElementById( 'c' + parentNodeID );
         if ( !divElement )
         {
             return;
@@ -363,7 +359,7 @@ function ContentStructureMenuBrowse( params, i18n )
 
     this.collapse = function( parentNodeID )
     {
-        var divElement = document.getElementById( 'c-browse' + parentNodeID );
+        var divElement = document.getElementById( 'c' + parentNodeID );
         if ( !divElement )
         {
             return;
@@ -376,7 +372,7 @@ function ContentStructureMenuBrowse( params, i18n )
             if ( aElement.className == 'openclose-close' )
             {
                 var nodeID        = aElement.id.substr( 1 );
-                var subdivElement = document.getElementById( 'c-browse' + nodeID );
+                var subdivElement = document.getElementById( 'c' + nodeID );
                 if ( subdivElement )
                 {
                     subdivElement.className = 'hidden';

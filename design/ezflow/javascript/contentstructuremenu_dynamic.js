@@ -1,4 +1,4 @@
-function ContentStructureMenu( params, i18n )
+function NXCContentStructureMenu( params, i18n )
 {
     this.cookieName     = "contentStructureMenu";
     this.cookieValidity = 3650; // days
@@ -173,7 +173,11 @@ function ContentStructureMenu( params, i18n )
                 + '"';
         }
 
-        html += '><span class="node-name-'
+        html += '><img src="'
+            + icon
+            + '" alt="" title="['
+            + params.classes[item.class_id].name.replace(/>/g,'&gt;').replace(/"/g, '&quot;')
+            + '] ' + i18n.expand + '" width="16" height="16" /><span class="node-name-'
             + ( ( item.is_hidden )? 'hidden':
                                     ( item.is_invisible )? 'hiddenbyparent':
                                                            'normal' )

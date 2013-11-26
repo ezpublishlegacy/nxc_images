@@ -125,7 +125,7 @@
     params.perm      = "{concat($current_user.role_id_list|implode(','),'|',$current_user.limited_assignment_value_list|implode(','))|md5}";
 {/default}
 
-    window.treeMenu = new ContentStructureMenu( params, i18n );
+    window.treeMenu = new NXCContentStructureMenu( params, i18n );
 	jQuery( '#contentstructure' ).append( jQuery( '<ul id="content_tree_menu">' + treeMenu.generateEntry( rootNode, false, true ) + '<\/ul>' ) );
     window.treeMenu.load( false, rootNode.node_id, rootNode.modified_subnode );
 {rdelim})();

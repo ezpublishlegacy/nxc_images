@@ -6,7 +6,7 @@
                                            'css', array()
                                            )}
 <script type="text/javascript" src={"javascript/lib/ezjslibimagepreloader.js"|ezdesign}></script>
-<script type="text/javascript" src={"javascript/contentstructuremenu_dynamic.js"|ezdesign}></script>
+<script type="text/javascript" src={"javascript/nxc_contentstructuremenu_dynamic.js"|ezdesign}></script>
 <script type="text/javascript" src={"javascript/contentstructuremenu_dynamic_nxcimages_browse.js"|ezdesign}></script>
 <link rel="stylesheet" type="text/css" href={"stylesheets/pagelayout.css"|ezdesign} />
 <link rel="stylesheet" type="text/css" href={"stylesheets/ezajax_autocomplete.css"|ezdesign} />

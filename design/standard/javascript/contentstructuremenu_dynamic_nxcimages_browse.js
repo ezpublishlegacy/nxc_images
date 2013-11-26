@@ -1,6 +1,6 @@
 function ContentStructureMenuBrowse( params, i18n )
 {
-    this.cookieName     = "contentStructureMenu";
+    this.cookieName     = "contentStructureMenu-browse";
     this.cookieValidity = 3650; // days
     this.cookie         = params.useCookie ? _getCookie( this.cookieName ) : '';
     this.open           = ( this.cookie )? this.cookie.split( '/' ): [];
@@ -146,11 +146,7 @@ function ContentStructureMenuBrowse( params, i18n )
                 + ', '
                 + ( ( canCreateClasses )? '-1':
                                           '\'menu-create-here\'' )
-                + ' ); return false"><img src="'
-                + icon
-                + '" alt="" title="['
-                + params.classes[item.class_id].name.replace(/>/g,'&gt;').replace(/"/g, '&quot;')
-                + '] ' + i18n.expand + '" width="16" height="16" /><\/a>';
+                + ' ); return false"><\/a>';
         }
         else
         {
@@ -177,7 +173,12 @@ function ContentStructureMenuBrowse( params, i18n )
                 + '"';
         }
 
-        html += '><span class="node-name-'
+        html += '><img src="'
+            + icon
+            + '" alt="" title="['
+            + params.classes[item.class_id].name.replace(/>/g,'&gt;').replace(/"/g, '&quot;')
+            + ']" width="16" height="16" />&nbsp;'
+            + '<span class="node-name-'
             + ( ( item.is_hidden )? 'hidden':
                                     ( item.is_invisible )? 'hiddenbyparent':
                                                            'normal' )
